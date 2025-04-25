@@ -235,7 +235,8 @@ do
 	local CSS_HSLA_FN_MINIMUM_LENGTH = #'hsla(0,0%,0%,0)' - 1
 	function css_fn.rgb(line, i)
 		if #line < i + CSS_RGB_FN_MINIMUM_LENGTH then return end
-		local r, g, b, match_end = line:sub(i):match("^rgb%(%s*(%d+%%?)%s*,%s*(%d+%%?)%s*,%s*(%d+%%?)%s*%)()")
+		local r, g, b, match_end = line:sub(i):match(
+      "^[rR][gG][bB]%s*%(%s*(%d+)%s*,%s*(%d+)%s*,%s*(%d+)%s*%)()")
 		if not match_end then return end
 		r = percent_or_hex(r) if not r then return end
 		g = percent_or_hex(g) if not g then return end
@@ -245,7 +246,8 @@ do
 	end
 	function css_fn.hsl(line, i)
 		if #line < i + CSS_HSL_FN_MINIMUM_LENGTH then return end
-		local h, s, l, match_end = line:sub(i):match("^hsl%(%s*(%d+)%s*,%s*(%d+)%%%s*,%s*(%d+)%%%s*%)()")
+		local h, s, l, match_end = line:sub(i):match(
+      "^[hH][sS][lL]%s*%(%s*(%d+)%s*,%s*(%d+)%%%s*,%s*(%d+)%%%s*%)()")   
 		if not match_end then return end
 		h = tonumber(h) if h > 360 then return end
 		s = tonumber(s) if s > 100 then return end
@@ -257,7 +259,8 @@ do
 	end
 	function css_fn.rgba(line, i)
 		if #line < i + CSS_RGBA_FN_MINIMUM_LENGTH then return end
-		local r, g, b, a, match_end = line:sub(i):match("^rgba%(%s*(%d+%%?)%s*,%s*(%d+%%?)%s*,%s*(%d+%%?)%s*,%s*([.%d]+)%s*%)()")
+		local r, g, b, a, match_end = line:sub(i):match(
+      "^[rR][gG][bB][aA]%s*%(%s*(%d+%%?)%s*,%s*(%d+%%?)%s*,%s*(%d+%%?)%s*,%s*([.%d]+)%s*%)()")
 		if not match_end then return end
 		a = tonumber(a) if not a or a > 1 then return end
 		r = percent_or_hex(r) if not r then return end
@@ -268,7 +271,8 @@ do
 	end
 	function css_fn.hsla(line, i)
 		if #line < i + CSS_HSLA_FN_MINIMUM_LENGTH then return end
-		local h, s, l, a, match_end = line:sub(i):match("^hsla%(%s*(%d+)%s*,%s*(%d+)%%%s*,%s*(%d+)%%%s*,%s*([.%d]+)%s*%)()")
+		local h, s, l, a, match_end = line:sub(i):match(
+      "^[hH][sS][lL][aA]%s*%(%s*(%d+)%s*,%s*(%d+)%%%s*,%s*(%d+)%%%s*,%s*([.%d]+)%s*%)()")
 		if not match_end then return end
 		a = tonumber(a) if not a or a > 1 then return end
 		h = tonumber(h) if h > 360 then return end
