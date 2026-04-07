@@ -153,7 +153,7 @@ return setmetatable({
 			end
 			local command = k:gsub("_$", "!")
 			local f = function(...)
-				return vim.api.nvim_command(table.concat(vim.iter().flatten({ command, ... }):totable(), " "))
+				return vim.api.nvim_command(table.concat(vim.iter():flatten({ command, ... }):totable(), " "))
 			end
 			mt[k] = f
 			return f
